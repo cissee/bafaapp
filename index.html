@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscription Livreur BAFA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #4361ee;
+      --primary-light: #4895ef;
+      --secondary: #3f37c9;
+      --accent: #f72585;
+      --success: #4cc9f0;
+      --warning: #f8961e;
+      --danger: #ef233c;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --gray: #6c757d;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    .header h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 15px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .header h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    .header p {
+      color: var(--gray);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .form-card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      padding: 40px;
+      margin-bottom: 40px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .form-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+    }
+
+    .form-section {
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .form-section:last-child {
+      border-bottom: none;
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    .section-title i {
+      margin-right: 10px;
+      color: var(--accent);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: var(--dark);
+      transition: all 0.3s ease;
+    }
+
+    .form-group label span {
+      color: var(--accent);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 14px 16px;
+      font-size: 1rem;
+      border: 2px solid #e9ecef;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      background-color: #f8f9fa;
+    }
+
+    .form-control:focus {
+      border-color: var(--primary-light);
+      box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+      outline: none;
+      background-color: white;
+    }
+
+    select.form-control {
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      background-size: 1em;
+    }
+
+    .file-upload {
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+      width: 100%;
+    }
+
+    .file-upload-btn {
+      width: 100%;
+      padding: 14px 16px;
+      background: linear-gradient(to right, var(--primary), var(--primary-light));
+      color: white;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .file-upload-btn:hover {
+      background: linear-gradient(to right, var(--secondary), var(--primary));
+      transform: translateY(-2px);
+    }
+
+    .file-upload-btn i {
+      margin-right: 8px;
+    }
+
+    .file-upload-input {
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    .file-name {
+      margin-top: 8px;
+      font-size: 0.9rem;
+      color: var(--gray);
+      display: flex;
+      align-items: center;
+    }
+
+    .file-name i {
+      margin-right: 5px;
+      color: var(--success);
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: flex-end;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      padding: 14px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      background: linear-gradient(to right, var(--primary), var(--primary-light));
+      color: white;
+      box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(to right, var(--primary-light), var(--primary));
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--gray);
+      border: 2px solid #e9ecef;
+    }
+
+    .btn-secondary:hover {
+      background: #f8f9fa;
+      color: var(--dark);
+      border-color: #dee2e6;
+    }
+
+    .btn i {
+      margin-right: 8px;
+    }
+
+    .progress-bar {
+      height: 6px;
+      background: #e9ecef;
+      border-radius: 3px;
+      margin-top: 30px;
+      overflow: hidden;
+      display: none;
+    }
+
+    .progress {
+      height: 100%;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      width: 0;
+      transition: width 0.4s ease;
+    }
+
+    .status-message {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 8px;
+      font-weight: 500;
+      text-align: center;
+      display: none;
+    }
+
+    .success {
+      background-color: rgba(76, 201, 240, 0.1);
+      color: var(--success);
+      border: 1px solid rgba(76, 201, 240, 0.3);
+    }
+
+    .error {
+      background-color: rgba(239, 35, 60, 0.1);
+      color: var(--danger);
+      border: 1px solid rgba(239, 35, 60, 0.3);
+    }
+
+    @media (max-width: 768px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .header h2 {
+        font-size: 2rem;
+      }
+      
+      .form-card {
+        padding: 30px 20px;
+      }
+      
+      .btn-group {
+        flex-direction: column;
+      }
+      
+      .btn {
+        width: 100%;
+      }
+    }
+
+    /* Animation for form groups */
+    .form-group {
+      animation: slideUp 0.5s ease-out;
+      animation-fill-mode: both;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Delay animations for each form group */
+    .form-group:nth-child(1) { animation-delay: 0.1s; }
+    .form-group:nth-child(2) { animation-delay: 0.2s; }
+    .form-group:nth-child(3) { animation-delay: 0.3s; }
+    .form-group:nth-child(4) { animation-delay: 0.4s; }
+    .form-group:nth-child(5) { animation-delay: 0.5s; }
+    .form-group:nth-child(6) { animation-delay: 0.6s; }
+    .form-group:nth-child(7) { animation-delay: 0.7s; }
+    .form-group:nth-child(8) { animation-delay: 0.8s; }
+    .form-group:nth-child(9) { animation-delay: 0.9s; }
+    .form-group:nth-child(10) { animation-delay: 1.0s; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2>Devenez Livreur BAFA</h2>
+      <p>Rejoignez notre équipe de livreurs et commencez à gagner de l'argent dès aujourd'hui !</p>
+    </div>
+
+    <form id="form" class="form-card">
+      <div class="form-section">
+        <h3 class="section-title"><i class="fas fa-user"></i> Informations Personnelles</h3>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="nom">Nom <span>*</span></label>
+            <input type="text" id="nom" name="nom" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="prenom">Prénom <span>*</span></label>
+            <input type="text" id="prenom" name="prenom" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="username">Nom d'utilisateur <span>*</span></label>
+            <input type="text" id="username" name="username" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email <span>*</span></label>
+            <input type="email" id="email" name="email" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="adresse">Adresse <span>*</span></label>
+            <input type="text" id="adresse" name="adresse" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="telephone">Téléphone <span>*</span></label>
+            <input type="tel" id="telephone" name="telephone" class="form-control" required>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3 class="section-title"><i class="fas fa-car"></i> Informations Véhicule</h3>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="typeVehicule">Type de véhicule <span>*</span></label>
+            <select id="typeVehicule" name="typeVehicule" class="form-control" required>
+              <option value="">-- Choisissez --</option>
+              <option value="Scooter">Scooter</option>
+              <option value="Tricycle">Tricycle (3 roues)</option>
+              <option value="Voiture">Voiture</option>
+              <option value="Camion de livraison">Camion de livraison</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="modeleVehicule">Modèle <span>*</span></label>
+            <input type="text" id="modeleVehicule" name="modeleVehicule" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="anneeVehicule">Année <span>*</span></label>
+            <input type="number" id="anneeVehicule" name="anneeVehicule" class="form-control" min="1900" max="2025" required>
+          </div>
+          <div class="form-group">
+            <label for="couleurVehicule">Couleur <span>*</span></label>
+            <input type="text" id="couleurVehicule" name="couleurVehicule" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="immatriculation">Immatriculation <span>*</span></label>
+            <input type="text" id="immatriculation" name="immatriculation" class="form-control" required>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h3 class="section-title"><i class="fas fa-file-upload"></i> Documents Requis</h3>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Photo Immatriculation <span>*</span></label>
+            <div class="file-upload">
+              <button type="button" class="file-upload-btn">
+                <i class="fas fa-camera"></i> Choisir un fichier
+              </button>
+              <input type="file" id="photoImmat" name="photoImmat" class="file-upload-input" required>
+            </div>
+            <div id="photoImmatName" class="file-name"><i class="fas fa-check-circle"></i> Aucun fichier sélectionné</div>
+          </div>
+          <div class="form-group">
+            <label>Photo Utilisateur <span>*</span></label>
+            <div class="file-upload">
+              <button type="button" class="file-upload-btn">
+                <i class="fas fa-user-circle"></i> Choisir un fichier
+              </button>
+              <input type="file" id="photoUser" name="photoUser" class="file-upload-input" required>
+            </div>
+            <div id="photoUserName" class="file-name"><i class="fas fa-check-circle"></i> Aucun fichier sélectionné</div>
+          </div>
+          <div class="form-group">
+            <label>Carte d'identité <span>*</span></label>
+            <div class="file-upload">
+              <button type="button" class="file-upload-btn">
+                <i class="fas fa-id-card"></i> Choisir un fichier
+              </button>
+              <input type="file" id="carteId" name="carteId" class="file-upload-input" required>
+            </div>
+            <div id="carteIdName" class="file-name"><i class="fas fa-check-circle"></i> Aucun fichier sélectionné</div>
+          </div>
+          <div class="form-group">
+            <label>Permis de conduire <span>*</span></label>
+            <div class="file-upload">
+              <button type="button" class="file-upload-btn">
+                <i class="fas fa-id-badge"></i> Choisir un fichier
+              </button>
+              <input type="file" id="permis" name="permis" class="file-upload-input" required>
+            </div>
+            <div id="permisName" class="file-name"><i class="fas fa-check-circle"></i> Aucun fichier sélectionné</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="dateInscription">Date d'inscription <span>*</span></label>
+        <input type="date" id="dateInscription" name="dateInscription" class="form-control" required>
+      </div>
+
+      <div class="progress-bar">
+        <div class="progress"></div>
+      </div>
+
+      <div id="statusMessage" class="status-message"></div>
+
+      <div class="btn-group">
+        <button type="reset" class="btn btn-secondary">
+          <i class="fas fa-times"></i> Annuler
+        </button>
+        <button type="submit" class="btn btn-primary">
+          <i class="fas fa-paper-plane"></i> Envoyer la demande
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('form');
+      const progressBar = document.querySelector('.progress-bar');
+      const progress = document.querySelector('.progress');
+      const statusMessage = document.getElementById('statusMessage');
+
+      // Gestion de l'affichage des noms de fichiers
+      const fileInputs = {
+        'photoImmat': 'photoImmatName',
+        'photoUser': 'photoUserName',
+        'carteId': 'carteIdName',
+        'permis': 'permisName'
+      };
+
+      Object.keys(fileInputs).forEach(inputId => {
+        const input = document.getElementById(inputId);
+        const display = document.getElementById(fileInputs[inputId]);
+        
+        input.addEventListener('change', function() {
+          if (this.files && this.files.length > 0) {
+            display.innerHTML = `<i class="fas fa-check-circle"></i> ${this.files[0].name}`;
+          } else {
+            display.innerHTML = '<i class="fas fa-check-circle"></i> Aucun fichier sélectionné';
+          }
+        });
+      });
+
+      // Soumission du formulaire
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        // Afficher la barre de progression
+        progressBar.style.display = 'block';
+        statusMessage.style.display = 'none';
+        
+        // Désactiver le bouton d'envoi
+        const submitBtn = form.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
+
+        try {
+          const formData = new FormData(form);
+          const data = {};
+          
+          // Simuler la progression (pour la démo)
+          let progressValue = 0;
+          const progressInterval = setInterval(() => {
+            progressValue += 10;
+            progress.style.width = `${progressValue}%`;
+            if (progressValue >= 100) clearInterval(progressInterval);
+          }, 300);
+
+          // Convertir FormData en objet
+          for (const [key, value] of formData.entries()) {
+            if (value instanceof File) {
+              const fileReader = await toBase64(value);
+              data[key] = {
+                name: value.name,
+                type: value.type,
+                data: fileReader.split(',')[1]
+              };
+            } else {
+              data[key] = value;
+            }
+          }
+
+          // Envoyer les données (remplacez par votre URL Google Apps Script)
+          const response = await fetch("https://script.google.com/macros/s/AKfycbyJivspvj2sJ7BVzZN_36SIYowtykC55TJrovaDxBjyylrRbKtgoMPDLXr2fs4jzo3pnw/exec", {
+            method: "POST",
+            body: JSON.stringify(data)
+          });
+
+          const result = await response.text();
+          
+          // Afficher le message de succès
+          statusMessage.textContent = "Votre demande a été envoyée avec succès !";
+          statusMessage.className = "status-message success";
+          statusMessage.style.display = "block";
+          
+          // Réinitialiser le formulaire après 3 secondes
+          setTimeout(() => {
+            form.reset();
+            Object.values(fileInputs).forEach(id => {
+              document.getElementById(id).innerHTML = '<i class="fas fa-check-circle"></i> Aucun fichier sélectionné';
+            });
+            statusMessage.style.display = "none";
+          }, 3000);
+          
+        } catch (error) {
+          // Afficher le message d'erreur
+          statusMessage.textContent = "Une erreur s'est produite : " + error.message;
+          statusMessage.className = "status-message error";
+          statusMessage.style.display = "block";
+          console.error("Erreur :", error);
+        } finally {
+          // Réactiver le bouton d'envoi
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Envoyer la demande';
+          
+          // Cacher la barre de progression
+          setTimeout(() => {
+            progressBar.style.display = 'none';
+            progress.style.width = '0';
+          }, 1000);
+        }
+      });
+
+      // Fonction pour convertir un fichier en base64
+      function toBase64(file) {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = reject;
+        });
+      }
+    });
+  </script>
+</body>
+</html>
